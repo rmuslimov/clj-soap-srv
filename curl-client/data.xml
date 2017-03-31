@@ -1,0 +1,8 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://tripsource.com/">
+  <soap:Header/>
+  <soap:Body>
+    <tns:GetHotelName>
+      <hotelId>9</hotelId>
+    </tns:GetHotelName>
+  </soap:Body>
+</soap:Envelope>
