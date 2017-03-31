@@ -10,4 +10,6 @@
   :main ^:skip-aot clj-soap-srv.core
   :target-path "target/%s"
   :profiles {:dev {:source-paths ["dev"]}
+             :user {:plugins [[refactor-nrepl "2.3.0-SNAPSHOT"]
+                              [cider/cider-nrepl "0.15.0-SNAPSHOT"]]}
              :uberjar {:aot :all}})
