@@ -1,10 +1,10 @@
 (ns clj-soap-srv.utils
   (:require [com.stuartsierra.component :as component]))
 
-;; Component system declaration for JaxRs
+;; Component system declaration for JaxWs
 ;; Here is short intro to idea: https://github.com/stuartsierra/component
 
-(defrecord JaxRsServer [endpoints]
+(defrecord JaxWsServer [endpoints]
   component/Lifecycle
   (start [{:keys [endpoints] :as this}]
     (let [started
@@ -19,5 +19,5 @@
      (for [[k item] started]
        (.stop item)))))
 
-(defn new-jaxrs-server [endpoints]
-  (JaxRsServer. endpoints))
+(defn new-jaxws-server [endpoints]
+  (JaxWsServer. endpoints))

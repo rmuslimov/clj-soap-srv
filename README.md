@@ -1,6 +1,6 @@
 # clj-soap-srv
 
-Here is short example of implementation SOAP server on clojure on top of JAX-RS.2.0.
+Here is short example of implementation SOAP server on clojure on top of JAX-WS.2.0.
 
 ## Installation
 

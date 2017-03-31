@@ -2,7 +2,7 @@
   (:gen-class)
   (:require [com.stuartsierra.component :as component]
             [clj-soap-srv.api :as api]
-            [clj-soap-srv.utils :refer [new-jaxrs-server]])
+            [clj-soap-srv.utils :refer [new-jaxws-server]])
   (:import [javax.jws
             WebService
             WebParam]
@@ -28,7 +28,7 @@
   "Production systems to start."
   []
   (component/system-map
-   :jax-rs (new-jaxrs-server enabled-endpoints)))
+   :jax-ws (new-jaxws-server enabled-endpoints)))
 
 (defn -main
   "I don't do a whole lot ... yet."
