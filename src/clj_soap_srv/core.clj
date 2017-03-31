@@ -33,4 +33,5 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (println "Starting..."))
+  (component/start (prod-system))
+  (println "System has been started..."))
