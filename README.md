@@ -7,6 +7,10 @@ Here is short example of implementation SOAP server on clojure on top of JAX-WS.
 - Install Java
 - Install Leiningen https://leiningen.org/
 - Clone repo
+- Copy paste WSDL files to `./resources/wsdl`
+- Generate java classes by calling:
+
+		$ make wsimport
 
 ## Playing with it
 
@@ -16,17 +20,16 @@ To run REPL just call:
 
 Then enter in repl next commands:
 
-	$ (ns user)
+	$ (ns dev)
 	$ (reload-system!)
 
 We just started endpoint implementing our service, after any change we've made in code - system can be restarted and reload application's code.
 To check that all system working properly:
 
-- Check generated wsdl file: http://localhost:8080/HotelInfoWS?wsdl
-- Check generated xsd file: http://localhost:8080/HotelInfoWS?xsd=1
+- Check generated wsdl file: http://localhost:8080/ConcurHotelServiceWS?wsdl
 - Run example request to system in new terminal window:
 
-		$ make example
+		$ make ping
 
 To see how changing code works, go to `clj-soap-srv/api.clj` and slightly change `get-hotel-name` function. Then return back to terminal #1, and call:
 
@@ -42,9 +45,8 @@ Here is easiest way to run app with leiningen:
 
 Then from new terminal window call:
 
-	$ make example
+	$ make ping
 
 You should see response from soap server. You can also check generated wsdl, xsd file at:
 
-- http://localhost:8080/HotelInfoWS?wsdl
-- http://localhost:8080/HotelInfoWS?xsd=1
+- Check generated xsd file: http://localhost:8080/HotelInfoWS?xsd=1

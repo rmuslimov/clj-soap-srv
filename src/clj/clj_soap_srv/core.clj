@@ -39,7 +39,10 @@
                      :targetNamespace "http://www.concur.com/webservice/auth"
                      :header true
                      :partName "Header"}} header]
-   (doto (OTAPingRS.) (.setEchoToken "Pong"))))
+   (let [token (. body getEchoToken)]
+    (doto (OTAPingRS.)
+     (-> .getSuccessAndWarningsAndEchoData (.add "hello"))
+     (. setEchoToken token)))))
 
 (def enabled-endpoints
   {:hotel-info

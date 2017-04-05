@@ -1,7 +1,7 @@
 .PHONY: example wsimport
 
-example:
-	curl -s --header "Content-Type: text/xml;charset=UTF-8" --data @curl-client/data.xml http://localhost:8080/HotelInfoWS | xmllint --format -
+ping:
+	curl -s --header "Content-Type: text/xml;charset=UTF-8" --data @curl-client/ping.xml http://localhost:8080/ConcurHotelServiceWS | xmllint --format -
 
 javac:
 	lein with-profile base,system javac

@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:auth="http://www.concur.com/webservice/auth" xmlns:ns="http://www.opentravel.org/OTA/2003/05">
+   <soapenv:Header>
+      <auth:authentication>
+         <auth:userid>user</auth:userid>
+         <auth:password>password</auth:password>
+      </auth:authentication>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ns:ping>
+         <ns:OTA_PingRQ Version="1" EchoToken="abcd">
+            <ns:EchoData>ping</ns:EchoData>
+         </ns:OTA_PingRQ>
+      </ns:ping>
+   </soapenv:Body>
+</soapenv:Envelope>
