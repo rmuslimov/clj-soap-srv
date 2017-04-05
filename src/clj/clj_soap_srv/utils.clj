@@ -1,4 +1,5 @@
 (ns clj-soap-srv.utils
+  (:gen-class)
   (:require [com.stuartsierra.component :as component]))
 
 ;; Component system declaration for JaxWs

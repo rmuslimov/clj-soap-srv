@@ -9,11 +9,10 @@
                  [reloaded.repl "0.2.3"]]
   :main ^:skip-aot clj-soap-srv.core
   :target-path "target/%s"
-  :resource-paths ["src/java"]
   :source-paths ["src/clj"]
   :java-source-paths ["src/java"]
-  :plugins [[lein-virgil "0.1.6"]]
-  :profiles {:dev {:source-paths ["dev"]}
+  :profiles {:dev {:source-paths ["dev"]
+                   :plugins [[lein-virgil "0.1.6"]]}
              :user {:plugins [[refactor-nrepl "2.3.0-SNAPSHOT"]
                               [cider/cider-nrepl "0.15.0-SNAPSHOT"]]}
              :uberjar {:aot :all}})
