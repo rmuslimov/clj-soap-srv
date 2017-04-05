@@ -35,7 +35,7 @@ To see how changing code works, go to `clj-soap-srv/api.clj` and slightly change
 
 	$ (reload-system!)
 
-Calling `$ make example` after that should return new response.
+Calling `$ make ping` after that should return new response.
 
 ## I want just run it
 
