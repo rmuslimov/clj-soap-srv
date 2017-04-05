@@ -12,6 +12,7 @@
   :resource-paths ["src/java"]
   :source-paths ["src/clj"]
   :java-source-paths ["src/java"]
+  :plugins [[lein-virgil "0.1.6"]]
   :profiles {:dev {:source-paths ["dev"]}
              :user {:plugins [[refactor-nrepl "2.3.0-SNAPSHOT"]
                               [cider/cider-nrepl "0.15.0-SNAPSHOT"]]}
