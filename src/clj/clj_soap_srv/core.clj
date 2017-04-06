@@ -10,7 +10,7 @@
 
 (def concur-endpoint-url "http://localhost:8080/ConcurHotelServiceWS")
 (defconcur ConcurHotel
-  (^{:param "OTA_PingRS"}
+  (^{:result "OTA_PingRS"}
    ping [^{:param "OTA_PingRQ"} body
          ^{:param "authentication"} header]
    (api/ping body header)))

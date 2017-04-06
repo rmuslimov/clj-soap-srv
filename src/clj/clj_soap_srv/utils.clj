@@ -38,13 +38,14 @@
 
 (defn get-obj-meta
   "Get information for ws, based on param name."
-  [obj & {:keys [result?] :or {:result? false}}]
-  (let [pname (-> obj meta :param)
-        info (get meta-mapping pname)
-        objname (str obj)
+  [obj]
+  (let [metaobj (meta obj)
+        result? (:result metaobj)
+        pname (or (:result metaobj) (:param metaobj))
+        info (assoc (get meta-mapping pname) :name pname)
         result (if result?
-                 `{WebResult ~(assoc info :name pname) WebMethod {:action ~objname}}
-                 `{WebParam ~(assoc info :name pname)})]
+                 `{WebResult ~info WebMethod {:action ~(str obj)}}
+                 `{WebParam ~info})]
     (with-meta obj result)))
 
 (defn ws-service [name]
@@ -58,7 +59,7 @@
   `(deftype
        ~(ws-service name) [] ConcurHotelServiceEndpoint
        ~@(for [[mname args body] methods]
-           `(~(get-obj-meta mname :result? true)
+           `(~(get-obj-meta mname)
              [this#
               ~@(for [arg args]
                   (get-obj-meta arg))]
@@ -67,7 +68,7 @@
 (comment
   (macroexpand-1
    '(defconcur ConcurHotel
-      (^{:param "OTA_PingRS"}
+      (^{:result "OTA_PingRS"}
        ping [^{:param "OTA_PingRQ"} body
              ^{:param "authentication"} header]
        (api/ping body header))))
