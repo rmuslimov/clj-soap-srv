@@ -1,57 +1,24 @@
 (ns clj-soap-srv.core
   (:gen-class)
-  (:require [com.stuartsierra.component :as component]
-            [clj-soap-srv.api :as api]
-            [clj-soap-srv.utils :refer [new-jaxws-server]])
-  (:import [javax.jws WebService WebParam WebResult WebMethod]
-           javax.xml.ws.Endpoint
-           [org.opentravel.ota._2003._05 OTAPingRQ OTAPingRS]
-           [ota2015b ConcurHotelServiceEndpoint]
-           javax.jws.soap.SOAPBinding
-           ))
+  (:require [clj-soap-srv
+             [api :as api]
+             [utils :refer [defconcur new-jaxws-server]]]
+            [com.stuartsierra.component :as component])
+  (:import javax.xml.ws.Endpoint
+              [javax.jws WebService WebParam WebResult WebMethod]
+))
 
-(def hotel-info-url "http://localhost:8080/HotelInfoWS")
-(definterface IHotelInfoWS
-  (^String GetHotelName [^String hotelId]))
-
-(deftype ^{WebService {:targetNamespace "http://tripsource.com/"}}
-    HotelInfoWS []
-    IHotelInfoWS
-    (GetHotelName [this
-                   ^{WebParam {:name "hotelId"}} hotel_id]
-      (api/get-hotel-name hotel_id)))
-
-(def concur-url "http://localhost:8080/ConcurHotelServiceWS")
-(deftype ^{WebService {:name "ConcurHotelServiceEndpoint"
-                       :targetNamespace "http://www.opentravel.org/OTA/2003/05"}}
-    ConcurHotel []
-  ConcurHotelServiceEndpoint
-  (
-   ^{WebMethod {:action "ping"}
-     WebResult {:name "OTA_PingRS"
-                :targetnamespace "http://www.opentravel.org/OTA/2003/05"
-                :partName "Body"}}
-   ping [this
-         ^{WebParam {:name "OTA_PingRQ"
-                     :targetNamespace "http://www.opentravel.org/OTA/2003/05"
-                     :partName "Body"}} body
-         ^{WebParam {:name "authentication"
-                     :targetNamespace "http://www.concur.com/webservice/auth"
-                     :header true
-                     :partName "Header"}} header]
-   (let [token (. body getEchoToken)]
-    (doto (OTAPingRS.)
-     (-> .getSuccessAndWarningsAndEchoData (.add "hello"))
-     (. setEchoToken token)))))
+(def concur-endpoint-url "http://localhost:8080/ConcurHotelServiceWS")
+(defconcur ConcurHotel
+  (^{:param "OTA_PingRS"}
+   ping [^{:param "OTA_PingRQ"} body
+         ^{:param "authentication"} header]
+   (api/ping body header)))
 
 (def enabled-endpoints
-  {:hotel-info
-   {:create-fn (fn [] (Endpoint/publish hotel-info-url (HotelInfoWS.)))
-    :endpoint nil}
-   :concur-hotel-service
-   {:create-fn (fn [] (Endpoint/publish concur-url (ConcurHotel.)))
-    :endpoint nil}
-   })
+  {:concur-hotel-service
+   {:create-fn (fn [] (Endpoint/publish concur-endpoint-url (ConcurHotel.)))
+    :endpoint nil}})
 
 (defn prod-system
   "Production systems to start."

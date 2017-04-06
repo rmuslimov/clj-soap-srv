@@ -1,6 +1,7 @@
-(ns clj-soap-srv.api)
+(ns clj-soap-srv.api
+  (:require [clj-soap-srv.interop :refer [new-ota-ping-rs]]))
 
-(defn get-hotel-name
-  "Return hotel name by id."
-  [hotel_id]
-  (format "Hotel name: %s!" hotel_id))
+(defn ping
+  [body header]
+  (let [{token :echoToken} (bean body)]
+    (new-ota-ping-rs :token token :messages ["hello"])))
