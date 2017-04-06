@@ -13,7 +13,16 @@
   (^{:result "OTA_PingRS"}
    ping [^{:param "OTA_PingRQ"} body
          ^{:param "authentication"} header]
-   (api/ping body header)))
+   (api/ping body header))
+  (^{:result "OTA_HotelSearchRS"}
+   search [^{:param "OTA_HotelSearchRQ"} body
+         ^{:param "authentication"} header]
+   (api/search body header))
+  (^{:result "OTA_HotelResRS"}
+   read [^{:param "OTA_ReadRQ"} body
+         ^{:param "authentication"} header]
+   (api/read body header))
+  )
 
 (def enabled-endpoints
   {:concur-hotel-service

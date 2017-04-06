@@ -34,6 +34,8 @@
 (def meta-mapping
   {"OTA_PingRQ" {:targetNamespace ota :partName "Body"}
    "OTA_PingRS" {:targetNamespace ota :partName "Body"}
+   "OTA_ReadRQ" {:targetNamespace ota :partName "Body"}
+   "OTA_HotelResRS" {:targetNamespace ota :partName "Body"}
    "authentication" {:targetNamespace cnc :partName "Header" :header true}})
 
 (defn get-obj-meta

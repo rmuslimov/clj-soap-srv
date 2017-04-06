@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [com.stuartsierra/component "0.3.2"]
                  [javax.ws.rs/javax.ws.rs-api "2.0"]
-                 [reloaded.repl "0.2.3"]]
+                 [reloaded.repl "0.2.3"]
+                 [org.clojure/java.data "0.1.1"]]
   :main ^:skip-aot clj-soap-srv.core
   :target-path "target/%s"
   :source-paths ["src/clj"]
